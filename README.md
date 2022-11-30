@@ -1,20 +1,22 @@
 svelte-reactive-css-preprocess
 ==============================
 
-[![npm package](https://img.shields.io/npm/v/svelte-reactive-css-preprocess)](https://www.npmjs.com/package/svelte-reactive-css-preprocess)
+*Note:* This is a fork of [this repo](https://github.com/srmullen/svelte-reactive-css-preprocess)
+
+[![npm package](https://img.shields.io/npm/v/svelte-reactive-css-preprocess-with-object-array-support)](https://www.npmjs.com/package/svelte-reactive-css-preprocess-with-object-array-support)
 
 Have you ever wished you could use your svelte variables in your component's styles. Now you can!
 
 ### Installation
 
-`npm install --save-dev svelte-reactive-css-preprocess`
+`npm install --save-dev svelte-reactive-css-preprocess-with-object-array-support`
 
 ### Usage
 
 In your svelte config
 
 ```javascript
-import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess';
+import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess-with-object-array-support';
 
 svelte({
   preprocess: [
@@ -28,7 +30,7 @@ If you're using [svelte-preprocess](https://github.com/sveltejs/svelte-preproces
 `npm install --save-dev svelte-sequential-preprocessor.`
 
 ```javascript
-import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess';
+import reactiveCSSPreprocessor from 'svelte-reactive-css-preprocess-with-object-array-support';
 import sveltePreprocess from 'svelte-preprocess';
 import seqPreprocess from 'svelte-sequential-preprocessor';
 
@@ -52,11 +54,16 @@ Now in your component's style you can reference the reactive variables using css
   // Create some variables that hold information about the component's style.
   export let size = 200;
   export let color = '#f00';
-
+  export let fontSize = 200;
+  export let fontColor = "#bbb";
+  $: styles = {
+    fontSize,
+    [0]: fontColor
+  }
   $: sizepx = `${size}px`;
 </script>
 
-<div class="square"></div>
+<div class="square">sample text</div>
 
 <style>
   .square {
@@ -64,6 +71,10 @@ Now in your component's style you can reference the reactive variables using css
     width: var(--sizepx);
     height: var(--sizepx);
     background-color: var(--color);
+    /* use - instead of "." to use property of an object*/
+    font-size: var(--styles-fontSize)
+    /* use -_number instaed of "[number]" to access number indexed property or array values*/
+    color: var(--styles-_0)
   }
 </style>
 ```

@@ -12,7 +12,7 @@
 	$: color2 = colors[(colorIdx + 1) % colors.length];
 
 	let size = 200;
-
+	$: prop = {color, color2}
 	function update() {
 		colorIdx++;
 		color = colors[colorIdx % colors.length];
@@ -36,14 +36,14 @@
 	}
 
 	h1 {
-		color: var(--color);
+		color: var(--prop-color);
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 400;
 	}
 
 	p {
-		color: var(--color2);
+		color: var(--prop-color2);
 	}
 
 	@media (min-width: 640px) {
