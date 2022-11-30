@@ -40,7 +40,7 @@ function intersectionScriptToStyle(scripts: string[], styles: string[]): Variabl
       if(selectedScript.includes(style)) return false
       selectedScript.push(style)
       return true
-    } )?.replace(/\-\_[^-]+\-{0,1}/g, (match) => `?.[${parseInt(match.replace(/[-_]/g, ""))}]${match[match.length-1] === "-" ? "-" : ""}`)?.replace(/\-[^-]+\-{0,1}/g, match => `?.${match.replace(/\-/g, "")}${match[match.length-1] === "-" ? "-" : ""}`) as string
+    } )?.replace(/\-\_[^-]+(?=\-{0,1})/g, (match) => `?.[${parseInt(match.replace(/[-_]/g, ""))}]`)?.replace(/-/g, "?.") as string
   }))
 }
 

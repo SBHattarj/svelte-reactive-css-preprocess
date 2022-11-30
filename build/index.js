@@ -35,7 +35,7 @@ function intersectionScriptToStyle(scripts, styles) {
                     return false;
                 selectedScript.push(style);
                 return true;
-            })) === null || _a === void 0 ? void 0 : _a.replace(/\-\_[^-]+\-{0,1}/g, function (match) { return "?.[".concat(parseInt(match.replace(/[-_]/g, "")), "]").concat(match[match.length - 1] === "-" ? "-" : ""); })) === null || _b === void 0 ? void 0 : _b.replace(/\-[^-]+\-{0,1}/g, function (match) { return "?.".concat(match.replace(/\-/g, "")).concat(match[match.length - 1] === "-" ? "-" : ""); })
+            })) === null || _a === void 0 ? void 0 : _a.replace(/\-\_[^-]+(?=\-{0,1})/g, function (match) { return "?.[".concat(parseInt(match.replace(/[-_]/g, "")), "]"); })) === null || _b === void 0 ? void 0 : _b.replace(/-/g, "?.")
         });
     });
 }
